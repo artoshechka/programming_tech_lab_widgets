@@ -4,76 +4,78 @@
 
 #include <square_module.hpp>
 
-using square_module::Win;
+using square_module::SquareModule;
 
-    Win::Win(QWidget *parent)
+SquareModule::SquareModule(QWidget *parent)
     : QWidget(parent)
 {
-    codec = QTextCodec::codecForName("Windows-1251");
-    setWindowTitle(codec->toUnicode("Возведение в квадрат"));
-    frame = new QFrame(this);
-    frame->setFrameShadow(QFrame::Raised);
-    frame->setFrameShape(QFrame::Panel);
-    inputLabel = new QLabel(codec->toUnicode("Введите число:"), this);
-    inputEdit = new QLineEdit("", this);
-    StrValidator *v = new StrValidator(inputEdit);
-    inputEdit->setValidator(v);
-    outputLabel = new QLabel(codec->toUnicode("Результат:"), this);
-    outputEdit = new QLineEdit("", this);
-    nextButton = new QPushButton(codec->toUnicode("Следующее"), this);
-    exitButton = new QPushButton(codec->toUnicode("Выход"), this);
+    codecData_ = QTextCodec::codecForName("UTF-8");
+    setWindowTitle(codecData_->toUnicode("Возведение в квадрат"));
+    frameData_ = new QFrame(this);
+    frameData_->setFrameShadow(QFrame::Raised);
+    frameData_->setFrameShape(QFrame::Panel);
+    inputLabelData_ = new QLabel(codecData_->toUnicode("Введите число:"), this);
+    inputEditData_ = new QLineEdit("", this);
+    StrValidator *v = new StrValidator(inputEditData_);
+    inputEditData_->setValidator(v);
+    outputLabelData_ = new QLabel(codecData_->toUnicode("Результат:"), this);
+    outputEditData_ = new QLineEdit("", this);
+    nextButtonData_ = new QPushButton(codecData_->toUnicode("Следующее"), this);
+    exitButtonData_ = new QPushButton(codecData_->toUnicode("Выход"), this);
     // компоновка приложения выполняется согласно рисунку 2.
-    QVBoxLayout *vLayout1 = new QVBoxLayout(frame);
-    vLayout1->addWidget(inputLabel);
-    vLayout1->addWidget(inputEdit);
-    vLayout1->addWidget(outputLabel);
-    vLayout1->addWidget(outputEdit);
+    QVBoxLayout *vLayout1 = new QVBoxLayout(frameData_);
+    vLayout1->addWidget(inputLabelData_);
+    vLayout1->addWidget(inputEditData_);
+    vLayout1->addWidget(outputLabelData_);
+    vLayout1->addWidget(outputEditData_);
     vLayout1->addStretch();
     QVBoxLayout *vLayout2 = new QVBoxLayout();
-    vLayout2->addWidget(nextButton);
-    vLayout2->addWidget(exitButton);
+    vLayout2->addWidget(nextButtonData_);
+    vLayout2->addWidget(exitButtonData_);
     vLayout2->addStretch();
     QHBoxLayout *hLayout = new QHBoxLayout(this);
-    hLayout->addWidget(frame);
+    hLayout->addWidget(frameData_);
     hLayout->addLayout(vLayout2);
-    begin();
-    connect(exitButton, SIGNAL(clicked(bool)), this, SLOT(close()));
-    connect(nextButton, SIGNAL(clicked(bool)), this, SLOT(begin()));
-    connect(inputEdit, SIGNAL(returnPressed()), this, SLOT(calc()));
+    Begin();
+    connect(exitButtonData_, SIGNAL(clicked(bool)), this, SLOT(close()));
+    connect(nextButtonData_, SIGNAL(clicked(bool)), this, SLOT(Begin()));
+    connect(inputEditData_, SIGNAL(returnPressed()), this, SLOT(Calc()));
 }
-void Win::begin()
+
+void SquareModule::Begin()
 {
-    inputEdit->clear();
-    nextButton->setEnabled(false);
-    nextButton->setDefault(false);
-    inputEdit->setEnabled(true);
-    outputLabel->setVisible(false);
-    outputEdit->setVisible(false);
-    outputEdit->setEnabled(false);
-    inputEdit->setFocus();
+    inputEditData_->clear();
+    nextButtonData_->setEnabled(false);
+    nextButtonData_->setDefault(false);
+    inputEditData_->setEnabled(true);
+    outputLabelData_->setVisible(false);
+    outputEditData_->setVisible(false);
+    outputEditData_->setEnabled(false);
+    inputEditData_->setFocus();
 }
-void Win::calc()
+
+void SquareModule::Calc()
 {
     bool Ok = true;
     float r, a;
-    QString str = inputEdit->text();
+    QString str = inputEditData_->text();
     a = str.toDouble(&Ok);
     if (Ok)
     {
         r = a * a;
         str.setNum(r);
-        outputEdit->setText(str);
-        inputEdit->setEnabled(false);
-        outputLabel->setVisible(true);
-        outputEdit->setVisible(true);
-        nextButton->setDefault(true);
-        nextButton->setEnabled(true);
-        nextButton->setFocus();
+        outputEditData_->setText(str);
+        inputEditData_->setEnabled(false);
+        outputLabelData_->setVisible(true);
+        outputEditData_->setVisible(true);
+        nextButtonData_->setDefault(true);
+        nextButtonData_->setEnabled(true);
+        nextButtonData_->setFocus();
     }
     else if (!str.isEmpty())
     {
-        QMessageBox msgBox(QMessageBox::Information, codec->toUnicode("Возведение в квадрат."),
-                           codec->toUnicode("Введено неверное значение."), QMessageBox::Ok);
+        QMessageBox msgBox(QMessageBox::Information, codecData_->toUnicode("Возведение в квадрат."),
+                           codecData_->toUnicode("Введено неверное значение."), QMessageBox::Ok);
         msgBox.exec();
     }
 }

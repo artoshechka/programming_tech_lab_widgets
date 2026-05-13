@@ -11,7 +11,7 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    square_module::Win win(0);
-    win.show();
+    square_module::SquareModule SquareModule(0);
+    SquareModule.show();
     return app.exec();
 }

@@ -5,37 +5,58 @@
 #define GUID_4b108220_4ebb_11f1_b4ac_0800200c9a66
 
 #include <QtWidgets>
+
 namespace square_module
 {
 
-class Win : public QWidget // класс окна
+/// @brief Класс окна с интерфейсом вычисления квадрата.
+class SquareModule : public QWidget
 {
-  Q_OBJECT // макрос Qt, обеспечивающий корректное создание сигналов и слотов
-      protected : QTextCodec *codec;
-    QFrame *frame;           // рамка
-    QLabel *inputLabel;      // метка ввода
-    QLineEdit *inputEdit;    // строчный редактор ввода
-    QLabel *outputLabel;     // метка вывода
-    QLineEdit *outputEdit;   // строчный редактор вывода
-    QPushButton *nextButton; // кнопка Следующее
-    QPushButton *exitButton; // кнопка Выход
-  public:
-    Win(QWidget *parent = 0); // конструктор
-  public slots:
-    void begin(); // метод начальной настройки интерфейса
-    void calc();  // метод реализации вычислений
+    Q_OBJECT
+
+   public:
+    /// @brief Конструктор окна.
+    /// @param[in] parent Родительский виджет.
+    explicit SquareModule(QWidget *parent = 0);
+
+   public slots:
+    /// @brief Метод начальной настройки интерфейса.
+    void Begin();
+
+    /// @brief Метод реализации вычислений.
+    void Calc();
+
+   protected:
+    QTextCodec *codecData_;
+    QFrame *frameData_;            ///< Рамка.
+    QLabel *inputLabelData_;       ///< Метка ввода.
+    QLineEdit *inputEditData_;     ///< Строчный редактор ввода.
+    QLabel *outputLabelData_;      ///< Метка вывода.
+    QLineEdit *outputEditData_;    ///< Строчный редактор вывода.
+    QPushButton *nextButtonData_;  ///< Кнопка "Следующее".
+    QPushButton *exitButtonData_;  ///< Кнопка "Выход".
 };
-class StrValidator : public QValidator // класс компонента проверки ввода
+
+/// @brief Класс компонента проверки ввода.
+class StrValidator : public QValidator
 {
-  public:
-    StrValidator(QObject *parent) : QValidator(parent)
+   public:
+    /// @brief Конструктор валидатора.
+    /// @param[in] parent Родительский объект.
+    explicit StrValidator(QObject *parent) : QValidator(parent)
     {
     }
-    virtual State validate(QString &str, int &pos) const
+
+    /// @brief Проверяет вводимую строку.
+    /// @param[in,out] str Вводимая строка.
+    /// @param[in,out] pos Позиция курсора.
+    /// @return Состояние валидатора.
+    State validate(QString &str, int &pos) const override
     {
         return Acceptable; // метод всегда принимает вводимую строку
     }
 };
-} // namespace square_module
 
-#endif // GUID_4b108220_4ebb_11f1_b4ac_0800200c9a66
+}  // namespace square_module
+
+#endif  // GUID_4b108220_4ebb_11f1_b4ac_0800200c9a66
