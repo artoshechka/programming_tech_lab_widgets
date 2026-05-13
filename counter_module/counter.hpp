@@ -4,47 +4,65 @@
 #ifndef GUID_1b2c8f5a_9b8e_4a7d_8a5c_1f6b9d2e3c41
 #define GUID_1b2c8f5a_9b8e_4a7d_8a5c_1f6b9d2e3c41
 
+#include <QtCore/QTextCodec>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
-#include <QtCore/QTextCodec>
 
 namespace counter_module
 {
+
+/// @brief Класс счетчика с сигналом на каждом пятом значении.
 class Counter : public QLineEdit
 {
     Q_OBJECT
+
   public:
-    Counter(const QString &contents, QWidget *parent = 0) : QLineEdit(contents, parent)
+    /// @brief Конструктор счетчика.
+    /// @param[in] contents Начальное значение.
+    /// @param[in] parent Родительский виджет.
+    explicit Counter(const QString &contents, QWidget *parent = 0) : QLineEdit(contents, parent)
     {
     }
+
   signals:
-    void tick_signal();
+    /// @brief Сигнал при достижении каждого пятого значения.
+    void TickSignal();
+
   public slots:
-    void add_one()
+    /// @brief Увеличивает значение на 1 и генерирует сигнал при каждом пятом значении.
+    void AddOne()
     {
         QString str = text();
         int r = str.toInt();
         if (r != 0 && r % 5 == 0)
-            emit tick_signal();
+            emit TickSignal();
         r++;
         str.setNum(r);
         setText(str);
     }
 };
+
+/// @brief Главное окно модуля счетчика.
 class Win : public QWidget
 {
     Q_OBJECT
-  protected:
-    QTextCodec *codec;
-    QLabel *label1, *label2;
-    Counter *edit1, *edit2;
-    QPushButton *calcbutton;
-    QPushButton *exitbutton;
 
   public:
-    Win(QWidget *parent = 0);
+    /// @brief Конструктор окна.
+    /// @param[in] parent Родительский виджет.
+    explicit Win(QWidget *parent = 0);
+
+  protected:
+    QTextCodec *codecData_;
+    QLabel *label1Data_;          ///< Метка для счетчика по 1.
+    QLabel *label2Data_;          ///< Метка для счетчика по 5.
+    Counter *edit1Data_;          ///< Поле счетчика по 1.
+    Counter *edit2Data_;          ///< Поле счетчика по 5.
+    QPushButton *calcButtonData_; ///< Кнопка увеличения счетчика.
+    QPushButton *exitButtonData_; ///< Кнопка выхода.
 };
+
 } // namespace counter_module
 #endif // GUID_1b2c8f5a_9b8e_4a7d_8a5c_1f6b9d2e3c41
