@@ -10,6 +10,22 @@
 using counter_module::Counter;
 using counter_module::Win;
 
+Counter::Counter(const QString &contents, QWidget *parent)
+    : QLineEdit(contents, parent)
+{
+}
+
+void Counter::AddOne()
+{
+    QString str = text();
+    int r = str.toInt();
+    if (r != 0 && r % 5 == 0)
+        emit TickSignal();
+    r++;
+    str.setNum(r);
+    setText(str);
+}
+
 Win::Win(QWidget *parent) : QWidget(parent)
 {
     codecData_ = QTextCodec::codecForName("UTF-8");
@@ -34,7 +50,6 @@ Win::Win(QWidget *parent) : QWidget(parent)
     layout4->addLayout(layout1);
     layout4->addLayout(layout2);
     layout4->addLayout(layout3);
-    // связь сигнала нажатия кнопки и слота закрытия окна
     connect(calcButtonData_, &QPushButton::clicked, edit1Data_, &Counter::AddOne);
     connect(edit1Data_, &Counter::TickSignal, edit2Data_, &Counter::AddOne);
     connect(exitButtonData_, &QPushButton::clicked, this, &QWidget::close);

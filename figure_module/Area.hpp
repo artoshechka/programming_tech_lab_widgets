@@ -18,24 +18,25 @@ namespace figure_module
 /// @brief Область отображения фигур.
 class Area : public QWidget
 {
-  int myTimerData_; // идентификатор таймера
-  float alphaData_; // угол поворота
-  public:
+   public:
     /// @brief Конструктор области.
     Area(QWidget *parent = 0);
     /// @brief Деструктор области.
     ~Area();
-    MyLine *myLineData_;
-    MyRect *myRectData_;
 
-  protected:
-    // обработчики событий
+   protected:
     void paintEvent(QPaintEvent *event);
     void timerEvent(QTimerEvent *event);
     void showEvent(QShowEvent *event);
     void hideEvent(QHideEvent *event);
+
+   private:
+    int myTimerData_;    ///< Идентификатор таймера.
+    float alphaData_;    ///< Угол поворота.
+    MyLine *myLineData_; ///< Линия.
+    MyRect *myRectData_; ///< Прямоугольник.
 };
 
-} // namespace figure_module
+}  // namespace figure_module
 
-#endif // GUID_5e2b9e70_0f21_4cc3_8f8a_8ef38a7c9b5e
+#endif  // GUID_5e2b9e70_0f21_4cc3_8f8a_8ef38a7c9b5e

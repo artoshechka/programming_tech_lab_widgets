@@ -13,10 +13,12 @@ Area::Area(QWidget *parent) : QWidget(parent)
     myRectData_ = new MyRect(220, 100, 50);
     alphaData_ = 0;
 }
+
 void Area::showEvent(QShowEvent *)
 {
-    myTimerData_ = startTimer(50); // создать таймер
+    myTimerData_ = startTimer(50);
 }
+
 void Area::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
@@ -24,21 +26,23 @@ void Area::paintEvent(QPaintEvent *)
     myLineData_->Move(alphaData_, &painter);
     myRectData_->Move(alphaData_ * (-0.5), &painter);
 }
+
 void Area::timerEvent(QTimerEvent *event)
 {
-    if (event->timerId() == myTimerData_) // если наш таймер
+    if (event->timerId() == myTimerData_)
     {
         alphaData_ = alphaData_ + 0.2;
-        update(); // обновить внешний вид
+        update();
     }
     else
-        QWidget::timerEvent(event); // иначе передать для стандартной
-                                    // обработки
+        QWidget::timerEvent(event);
 }
+
 void Area::hideEvent(QHideEvent *)
 {
-    killTimer(myTimerData_); // уничтожить таймер
+    killTimer(myTimerData_);
 }
+
 Area::~Area()
 {
     delete myLineData_;
