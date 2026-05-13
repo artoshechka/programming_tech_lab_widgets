@@ -1,5 +1,5 @@
 /// @file
-/// @brief Объявление класса для возведения модуля с отрисовкой Qt Widgets
+/// @brief Определение класса для возведения модуля с отрисовкой Qt Widgets
 /// @author Artemenko Anton
 
 #include <square_module.hpp>
@@ -44,6 +44,7 @@ SquareModule::SquareModule(QWidget *parent)
     connect(inputEditData_, &QLineEdit::returnPressed, this, &SquareModule::Calc);
 }
 
+/// @brief Сбрасывает форму в исходное состояние.
 void SquareModule::Begin()
 {
     inputEditData_->clear();
@@ -56,6 +57,7 @@ void SquareModule::Begin()
     inputEditData_->setFocus();
 }
 
+/// @brief Выполняет вычисление квадрата и обновляет форму.
 void SquareModule::Calc()
 {
     bool Ok = true;
