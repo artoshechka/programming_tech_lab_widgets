@@ -2,16 +2,14 @@
 /// @brief Точка входа в программу
 /// @author Artemenko Anton
 
-#include <square_module.hpp>
+#include <counter.hpp>
 
-/// @brief Точка входа в программу.
-/// @param[in] argc количество аргументов командной строки
-/// @param[in] argv массив аргументов командной строки
-/// @return код завершения приложения
+#include <QtWidgets/QApplication>
+
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    square_module::SquareModule squareModule(0);
-    squareModule.show();
+    counter_module::Win win(0);
+    win.show();
     return app.exec();
 }
