@@ -1,4 +1,4 @@
-// @file
+/// @file
 /// @brief Объявления фигур для модуля обработки событий
 /// @author Artemenko Anton
 #ifndef GUID_2c8a6d7f_9c01_4b0d_8c3f_1e9b6f5c6a01
@@ -10,38 +10,53 @@
 
 namespace figure_module
 {
+
+/// @brief Базовый класс фигуры.
 class Figura
 {
   protected:
-    int x, y, halflen, dx, dy, r;
-    virtual void draw(QPainter *Painter) = 0;
+    int xData_;
+    int yData_;
+    int halfLenData_;
+    int dxData_;
+    int dyData_;
+    int rData_;
+    virtual void Draw(QPainter *Painter) = 0;
 
   public:
-    Figura(int X, int Y, int Halflen) : x(X), y(Y), halflen(Halflen)
+    /// @brief Конструктор фигуры.
+    Figura(int x, int y, int halfLen) : xData_(x), yData_(y), halfLenData_(halfLen)
     {
     }
-    void move(float Alpha, QPainter *Painter);
+
+    /// @brief Выполняет перемещение и отрисовку.
+    void Move(float Alpha, QPainter *Painter);
 };
+
+/// @brief Линия.
 class MyLine : public Figura
 {
   protected:
-    void draw(QPainter *Painter);
+    void Draw(QPainter *Painter);
 
   public:
-    MyLine(int x, int y, int halflen) : Figura(x, y, halflen)
+    MyLine(int x, int y, int halfLen) : Figura(x, y, halfLen)
     {
     }
 };
+
+/// @brief Прямоугольник.
 class MyRect : public Figura
 {
   protected:
-    void draw(QPainter *Painter);
+    void Draw(QPainter *Painter);
 
   public:
-    MyRect(int x, int y, int halflen) : Figura(x, y, halflen)
+    MyRect(int x, int y, int halfLen) : Figura(x, y, halfLen)
     {
     }
-  };
-  } // namespace figure_module
+};
 
-  #endif // GUID_2c8a6d7f_9c01_4b0d_8c3f_1e9b6f5c6a01
+} // namespace figure_module
+
+#endif // GUID_2c8a6d7f_9c01_4b0d_8c3f_1e9b6f5c6a01

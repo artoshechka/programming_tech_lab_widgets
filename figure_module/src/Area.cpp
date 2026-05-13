@@ -1,3 +1,7 @@
+/// @file
+/// @brief Реализация области отображения фигур
+/// @author Artemenko Anton
+
 #include <Area.hpp>
 
 using figure_module::Area;
@@ -5,26 +9,26 @@ using figure_module::Area;
 Area::Area(QWidget *parent) : QWidget(parent)
 {
     setFixedSize(QSize(300, 200));
-    myline = new MyLine(80, 100, 50);
-    myrect = new MyRect(220, 100, 50);
-    alpha = 0;
+    myLineData_ = new MyLine(80, 100, 50);
+    myRectData_ = new MyRect(220, 100, 50);
+    alphaData_ = 0;
 }
 void Area::showEvent(QShowEvent *)
 {
-    myTimer = startTimer(50); // создать таймер
+    myTimerData_ = startTimer(50); // создать таймер
 }
 void Area::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
     painter.setPen(Qt::red);
-    myline->move(alpha, &painter);
-    myrect->move(alpha * (-0.5), &painter);
+    myLineData_->Move(alphaData_, &painter);
+    myRectData_->Move(alphaData_ * (-0.5), &painter);
 }
 void Area::timerEvent(QTimerEvent *event)
 {
-    if (event->timerId() == myTimer) // если наш таймер
+    if (event->timerId() == myTimerData_) // если наш таймер
     {
-        alpha = alpha + 0.2;
+        alphaData_ = alphaData_ + 0.2;
         update(); // обновить внешний вид
     }
     else
@@ -33,10 +37,10 @@ void Area::timerEvent(QTimerEvent *event)
 }
 void Area::hideEvent(QHideEvent *)
 {
-    killTimer(myTimer); // уничтожить таймер
+    killTimer(myTimerData_); // уничтожить таймер
 }
 Area::~Area()
 {
-    delete myline;
-    delete myrect;
+    delete myLineData_;
+    delete myRectData_;
 }

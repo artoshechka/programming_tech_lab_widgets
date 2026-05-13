@@ -1,23 +1,27 @@
+/// @file
+/// @brief Реализация фигур для модуля обработки событий
+/// @author Artemenko Anton
+
 #include <Figure.hpp>
 
 using figure_module::Figura;
 using figure_module::MyLine;
 using figure_module::MyRect;
 
-void Figura::move(float Alpha, QPainter *Painter)
+void Figura::Move(float Alpha, QPainter *Painter)
 {
-    dx = halflen * cos(Alpha);
-    dy = halflen * sin(Alpha);
-    draw(Painter);
+    dxData_ = halfLenData_ * cos(Alpha);
+    dyData_ = halfLenData_ * sin(Alpha);
+    Draw(Painter);
 }
-void MyLine::draw(QPainter *Painter)
+void MyLine::Draw(QPainter *Painter)
 {
-    Painter->drawLine(x + dx, y + dy, x - dx, y - dy);
+    Painter->drawLine(xData_ + dxData_, yData_ + dyData_, xData_ - dxData_, yData_ - dyData_);
 }
-void MyRect::draw(QPainter *Painter)
+void MyRect::Draw(QPainter *Painter)
 {
-    Painter->drawLine(x + dx, y + dy, x + dy, y - dx);
-    Painter->drawLine(x + dy, y - dx, x - dx, y - dy);
-    Painter->drawLine(x - dx, y - dy, x - dy, y + dx);
-    Painter->drawLine(x - dy, y + dx, x + dx, y + dy);
+    Painter->drawLine(xData_ + dxData_, yData_ + dyData_, xData_ + dyData_, yData_ - dxData_);
+    Painter->drawLine(xData_ + dyData_, yData_ - dxData_, xData_ - dxData_, yData_ - dyData_);
+    Painter->drawLine(xData_ - dxData_, yData_ - dyData_, xData_ - dyData_, yData_ + dxData_);
+    Painter->drawLine(xData_ - dyData_, yData_ + dxData_, xData_ + dxData_, yData_ + dyData_);
 }

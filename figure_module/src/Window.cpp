@@ -1,15 +1,19 @@
+/// @file
+/// @brief Реализация окна модуля обработки событий
+/// @author Artemenko Anton
+
 #include <Window.hpp>
 
 using figure_module::Window;
 
 Window::Window()
 {
-    codec = QTextCodec::codecForName("Windows-1251");
-    this->setWindowTitle(codec->toUnicode("Обработка событий"));
-    area = new Area(this);
-    btn = new QPushButton(codec->toUnicode("Завершить"), this);
+    codecData_ = QTextCodec::codecForName("UTF-8");
+    setWindowTitle(codecData_->toUnicode("Обработка событий"));
+    areaData_ = new Area(this);
+    btnData_ = new QPushButton(codecData_->toUnicode("Завершить"), this);
     QVBoxLayout *layout = new QVBoxLayout(this);
-    layout->addWidget(area);
-    layout->addWidget(btn);
-    connect(btn, SIGNAL(clicked(bool)), this, SLOT(close()));
-};
+    layout->addWidget(areaData_);
+    layout->addWidget(btnData_);
+    connect(btnData_, &QPushButton::clicked, this, &QWidget::close);
+}
