@@ -2,6 +2,8 @@
 /// @brief Точка входа в программу
 /// @author Artemenko Anton
 
+#include <square_module.hpp>
+#include <counter.hpp>
 #include <Window.hpp>
 
 #include <QtWidgets/QApplication>
@@ -13,7 +15,15 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    figure_module::Window win;
-    win.show();
+
+    square_module::SquareModule squareWin(nullptr);
+    squareWin.show();
+
+    counter_module::Win counterWin(nullptr);
+    counterWin.show();
+
+    figure_module::Window figureWin;
+    figureWin.show();
+
     return app.exec();
 }
