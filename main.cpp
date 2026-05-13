@@ -2,7 +2,7 @@
 /// @brief Точка входа в программу
 /// @author Artemenko Anton
 
-#include <Window.hpp>
+#include <launcher.hpp>
 
 #include <QtWidgets/QApplication>
 
@@ -13,7 +13,7 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    figure_module::Window win;
-    win.show();
+    launcher_module::Launcher launcher;
+    launcher.show();
     return app.exec();
 }

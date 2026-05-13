@@ -18,30 +18,19 @@ class Counter : public QLineEdit
 {
     Q_OBJECT
 
-  public:
+   public:
     /// @brief Конструктор счетчика.
     /// @param[in] contents Начальное значение.
     /// @param[in] parent Родительский виджет.
-    explicit Counter(const QString &contents, QWidget *parent = 0) : QLineEdit(contents, parent)
-    {
-    }
+    explicit Counter(const QString &contents, QWidget *parent = 0);
 
-  signals:
+   signals:
     /// @brief Сигнал при достижении каждого пятого значения.
     void TickSignal();
 
-  public slots:
+   public slots:
     /// @brief Увеличивает значение на 1 и генерирует сигнал при каждом пятом значении.
-    void AddOne()
-    {
-        QString str = text();
-        int r = str.toInt();
-        if (r != 0 && r % 5 == 0)
-            emit TickSignal();
-        r++;
-        str.setNum(r);
-        setText(str);
-    }
+    void AddOne();
 };
 
 /// @brief Главное окно модуля счетчика.
@@ -49,13 +38,13 @@ class Win : public QWidget
 {
     Q_OBJECT
 
-  public:
+   public:
     /// @brief Конструктор окна.
     /// @param[in] parent Родительский виджет.
     explicit Win(QWidget *parent = 0);
 
-  protected:
-    QTextCodec *codecData_;
+   protected:
+    QTextCodec *codecData_;           ///< Кодек UTF-8.
     QLabel *label1Data_;          ///< Метка для счетчика по 1.
     QLabel *label2Data_;          ///< Метка для счетчика по 5.
     Counter *edit1Data_;          ///< Поле счетчика по 1.
@@ -64,5 +53,6 @@ class Win : public QWidget
     QPushButton *exitButtonData_; ///< Кнопка выхода.
 };
 
-} // namespace counter_module
-#endif // GUID_1b2c8f5a_9b8e_4a7d_8a5c_1f6b9d2e3c41
+}  // namespace counter_module
+
+#endif  // GUID_1b2c8f5a_9b8e_4a7d_8a5c_1f6b9d2e3c41

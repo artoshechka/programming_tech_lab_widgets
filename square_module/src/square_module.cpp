@@ -7,6 +7,7 @@
 #include <QtWidgets/QHBoxLayout>
 
 using square_module::SquareModule;
+using square_module::StrValidator;
 
 SquareModule::SquareModule(QWidget *parent)
     : QWidget(parent)
@@ -44,7 +45,6 @@ SquareModule::SquareModule(QWidget *parent)
     connect(inputEditData_, &QLineEdit::returnPressed, this, &SquareModule::Calc);
 }
 
-/// @brief Сбрасывает форму в исходное состояние.
 void SquareModule::Begin()
 {
     inputEditData_->clear();
@@ -57,7 +57,6 @@ void SquareModule::Begin()
     inputEditData_->setFocus();
 }
 
-/// @brief Выполняет вычисление квадрата и обновляет форму.
 void SquareModule::Calc()
 {
     bool Ok = true;
@@ -82,4 +81,14 @@ void SquareModule::Calc()
                            codecData_->toUnicode("Введено неверное значение."), QMessageBox::Ok);
         msgBox.exec();
     }
+}
+
+StrValidator::StrValidator(QObject *parent)
+    : QValidator(parent)
+{
+}
+
+QValidator::State StrValidator::validate(QString &, int &) const
+{
+    return Acceptable;
 }

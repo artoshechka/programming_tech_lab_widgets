@@ -11,13 +11,14 @@ set(CMAKE_AUTOUIC ON)
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
+add_subdirectory(square_module)
 add_subdirectory(counter_module)
 add_subdirectory(figure_module)
+add_subdirectory(launcher_module)
 
 add_executable(programming_tech_lab_widgets main.cpp)
 target_link_libraries(programming_tech_lab_widgets
 	PRIVATE
-		counter_module
-		figure_module
+		launcher_module
 		Qt5::Widgets
 )

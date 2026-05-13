@@ -35,7 +35,7 @@ class SquareModule : public QWidget
     void Calc();
 
    protected:
-    QTextCodec *codecData_;
+    QTextCodec *codecData_;        ///< Кодек UTF-8.
     QFrame *frameData_;            ///< Рамка.
     QLabel *inputLabelData_;       ///< Метка ввода.
     QLineEdit *inputEditData_;     ///< Строчный редактор ввода.
@@ -51,18 +51,13 @@ class StrValidator : public QValidator
    public:
     /// @brief Конструктор валидатора.
     /// @param[in] parent Родительский объект.
-    explicit StrValidator(QObject *parent) : QValidator(parent)
-    {
-    }
+    explicit StrValidator(QObject *parent);
 
     /// @brief Проверяет вводимую строку.
     /// @param[in,out] str Вводимая строка.
     /// @param[in,out] pos Позиция курсора.
     /// @return Состояние валидатора.
-    State validate(QString &str, int &pos) const override
-    {
-        return Acceptable; // метод всегда принимает вводимую строку
-    }
+    State validate(QString &str, int &pos) const override;
 };
 
 }  // namespace square_module
