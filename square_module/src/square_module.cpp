@@ -3,6 +3,8 @@
 /// @author Artemenko Anton
 
 #include <square_module.hpp>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QHBoxLayout>
 
 using square_module::SquareModule;
 
@@ -37,9 +39,9 @@ SquareModule::SquareModule(QWidget *parent)
     hLayout->addWidget(frameData_);
     hLayout->addLayout(vLayout2);
     Begin();
-    connect(exitButtonData_, SIGNAL(clicked(bool)), this, SLOT(close()));
-    connect(nextButtonData_, SIGNAL(clicked(bool)), this, SLOT(Begin()));
-    connect(inputEditData_, SIGNAL(returnPressed()), this, SLOT(Calc()));
+    connect(exitButtonData_, &QPushButton::clicked, this, &QWidget::close);
+    connect(nextButtonData_, &QPushButton::clicked, this, &SquareModule::Begin);
+    connect(inputEditData_, &QLineEdit::returnPressed, this, &SquareModule::Calc);
 }
 
 void SquareModule::Begin()

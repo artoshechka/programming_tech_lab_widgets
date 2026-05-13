@@ -4,7 +4,15 @@
 #ifndef GUID_4b108220_4ebb_11f1_b4ac_0800200c9a66
 #define GUID_4b108220_4ebb_11f1_b4ac_0800200c9a66
 
-#include <QtWidgets>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QFrame>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QMessageBox>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QWidget>
+#include <QtGui/QValidator>
+#include <QtCore/QTextCodec>
 
 namespace square_module
 {

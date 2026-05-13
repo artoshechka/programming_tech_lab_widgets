@@ -10,5 +10,5 @@ target_include_directories(square_module
 
 target_link_libraries(square_module
 	PUBLIC
-		Qt${QT_VERSION_MAJOR}::Widgets
+		Qt5::Widgets
 )
